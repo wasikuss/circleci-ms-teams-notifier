@@ -17,11 +17,6 @@ parameters:
     default: false
 steps:
   - run:
-      name: Prepare Template
-      when: always
-      command: <<include(scripts/template.sh)>>
-
-  - run:
       when: always
       name: Setup Environment Variables
       environment:
@@ -29,6 +24,11 @@ steps:
         SHOW_MSG: << parameters.show_msg >>
         SHOW_AUTHOR: << parameters.show_author >>
       command: <<include(scripts/env.sh)>>
+
+  - run:
+      name: Prepare Template
+      when: always
+      command: <<include(scripts/template.sh)>>
 
   - unless:
       condition: << parameters.only_on_fail >>

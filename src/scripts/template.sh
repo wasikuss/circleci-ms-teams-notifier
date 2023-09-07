@@ -9,8 +9,6 @@ else
     fail
 fi
 
-env
-
 if [[ $SHOW_MSG == "1" ]]; then
     COMMIT_MSG=`git log --format=%B -1 $CIRCLE_SHA1`
 else
@@ -58,4 +56,3 @@ END_HEREDOC
 )
 
 echo "$MS_TEAMS_MSG_TEMPLATE" > /tmp/ms_teams_message
-echo 'export MS_TEAMS_MSG_TEMPLATE="'$MS_TEAMS_MSG_TEMPLATE'"' >> "$BASH_ENV"
