@@ -9,13 +9,13 @@ else
     fail
 fi
 
-if [[ $SHOW_MSG == "true" ]]; then
+if [[ $SHOW_MSG == "1" ]]; then
     COMMIT_MSG=`git log --format=%B -1 $CIRCLE_SHA1`
 else
     COMMIT_MSG="n/a"
 fi
 
-if [[ $SHOW_AUTHOR == "true" ]]; then
+if [[ $SHOW_AUTHOR == "1" ]]; then
     COMMIT_AUTHOR=`git log --format="%an <%ae>" -1 $CIRCLE_SHA1`
 else
     COMMIT_AUTHOR="n/a"
