@@ -1,3 +1,3 @@
-echo 'export WEBHOOK_URL="\<< parameters.webhook_url >>"' >> "$BASH_ENV"
-echo 'export SHOW_MSG="\<< parameters.show_msg >>"' >> "$BASH_ENV"
-echo 'export SHOW_AUTHOR="\<< parameters.show_author >>"' >> "$BASH_ENV"
+echo 'export WEBHOOK_URL="'$WEBHOOK_URL'"' >> "$BASH_ENV"
+echo 'export SHOW_MSG="'$SHOW_MSG'"' >> "$BASH_ENV"
+echo 'export SHOW_AUTHOR="'$SHOW_AUTHOR'"' >> "$BASH_ENV"

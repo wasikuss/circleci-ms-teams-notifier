@@ -24,6 +24,10 @@ steps:
   - run:
       when: always
       name: Setup Environment Variables
+      environment:
+        WEBHOOK_URL: << parameters.webhook_url >>
+        SHOW_MSG: << parameters.show_msg >>
+        SHOW_AUTHOR: << parameters.show_author >>
       command: <<include(scripts/env.sh)>>
 
   - unless:
