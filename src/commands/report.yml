@@ -7,6 +7,14 @@ parameters:
     description: Whether send notification only if previous steps failed
     type: boolean
     default: false
+  show_msg:
+    description: Show message?
+    type: boolean
+    default: false
+  show_author:
+    description: Show author?
+    type: boolean
+    default: false
 steps:
   - run:
       name: Prepare Template
@@ -16,8 +24,7 @@ steps:
   - run:
       when: always
       name: Setup Environment Variables
-      command: |
-        echo 'export WEBHOOK_URL="<< parameters.webhook_url >>"' >> "$BASH_ENV"
+      command: <<include(scripts/env.sh)>>
 
   - unless:
       condition: << parameters.only_on_fail >>
