@@ -9,6 +9,8 @@ else
     fail
 fi
 
+env
+
 if [[ $SHOW_MSG == "1" ]]; then
     COMMIT_MSG=`git log --format=%B -1 $CIRCLE_SHA1`
 else
