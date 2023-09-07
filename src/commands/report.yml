@@ -1,0 +1,34 @@
+description: Report the status of a job to MS Teams
+parameters:
+  webhook_url:
+    description: The Microsoft Teams Webhook URL.
+    type: string
+  only_on_fail:
+    description: Whether send notification only if previous steps failed
+    type: boolean
+    default: false
+steps:
+  - run:
+      name: Prepare Template
+      when: always
+      command: <<include(scripts/template.sh)>>
+
+  - unless:
+      condition: << parameters.only_on_fail >>
+      steps:
+        - run:
+            name: Report Build Success
+            environment:
+              STATUS: "Success"
+              COLOR: "14a603"
+              WEBHOOK_URL: << parameters.webhook_url >>
+            command: <<include(scripts/report.sh)>>
+            when: on_success
+  - run:
+      name: Report Build Failure
+      environment:
+        STATUS: "Failed"
+        COLOR: "e2091d"
+        WEBHOOK_URL: << parameters.webhook_url >>
+      command: <<include(scripts/report.sh)>>
+      when: on_fail
