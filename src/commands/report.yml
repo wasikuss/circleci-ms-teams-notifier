@@ -14,6 +14,7 @@ steps:
       command: <<include(scripts/template.sh)>>
 
   - run:
+      when: always
       name: Setup Environment Variables
       command: |
         echo 'export WEBHOOK_URL="<< parameters.webhook_url >>"' >> "$BASH_ENV"
