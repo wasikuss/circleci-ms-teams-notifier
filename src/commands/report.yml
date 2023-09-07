@@ -13,6 +13,11 @@ steps:
       when: always
       command: <<include(scripts/template.sh)>>
 
+  - run:
+      name: Setup Environment Variables
+      command: |
+        echo 'export WEBHOOK_URL="<< parameters.webhook_url >>"' >> "$BASH_ENV"
+
   - unless:
       condition: << parameters.only_on_fail >>
       steps:
@@ -21,7 +26,6 @@ steps:
             environment:
               STATUS: "Success"
               COLOR: "14a603"
-              WEBHOOK_URL: << parameters.webhook_url >>
             command: <<include(scripts/report.sh)>>
             when: on_success
   - run:
@@ -29,6 +33,5 @@ steps:
       environment:
         STATUS: "Failed"
         COLOR: "e2091d"
-        WEBHOOK_URL: << parameters.webhook_url >>
       command: <<include(scripts/report.sh)>>
       when: on_fail
