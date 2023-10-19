@@ -1,8 +1,5 @@
 description: Report the status of a job to MS Teams
 parameters:
-  webhook_url:
-    description: The Microsoft Teams Webhook URL.
-    type: string
   only_on_fail:
     description: Whether send notification only if previous steps failed
     type: boolean
@@ -20,7 +17,6 @@ steps:
       when: always
       name: Setup Environment Variables
       environment:
-        WEBHOOK_URL: << parameters.webhook_url >>
         SHOW_MSG: << parameters.show_msg >>
         SHOW_AUTHOR: << parameters.show_author >>
       command: <<include(scripts/env.sh)>>
