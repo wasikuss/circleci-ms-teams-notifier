@@ -25,92 +25,101 @@ fi
 
 MS_TEAMS_MSG_TEMPLATE=$(cat <<END_HEREDOC
 {
-    "type": "AdaptiveCard",
-    "body": [
+    "type": "message",
+    "attachments": [
         {
-            "type": "Container",
-            "bleed": true,
-            "backgroundImage": {
-                "url": "__build_img__"
+            "contentType": "application/vnd.microsoft.card.adaptive",
+            "contentUrl": null,
+            "content": {
+                "type": "AdaptiveCard",
+                "body": [
+                    {
+                        "type": "Container",
+                        "bleed": true,
+                        "backgroundImage": {
+                            "url": "__build_img__"
+                        }
+                    },
+                    {
+                        "type": "Container",
+                        "items": [
+                            {
+                                "type": "ColumnSet",
+                                "columns": [
+                                    {
+                                        "type": "Column",
+                                        "items": [
+                                            {
+                                                "type": "TextBlock",
+                                                "text": "STATUS:",
+                                                "weight": "Bolder"
+                                            }
+                                        ],
+                                        "width": "auto",
+                                        "horizontalAlignment": "Left"
+                                    },
+                                    {
+                                        "type": "Column",
+                                        "items": [
+                                            {
+                                                "type": "TextBlock",
+                                                "text": "__build_status__",
+                                                "weight": "Bolder",
+                                                "color": "__build_color__"
+                                            }
+                                        ],
+                                        "width": "auto",
+                                        "spacing": "Small"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "TextBlock",
+                                "text": "$CIRCLE_PROJECT_REPONAME job [${CIRCLE_JOB} #${CIRCLE_BUILD_NUM}]($CIRCLE_BUILD_URL)",
+                                "weight": "Bolder"
+                            },
+                            {
+                                "type": "FactSet",
+                                "facts": [
+                                    {
+                                        "title": "Git ref",
+                                        "value": "$CIRCLE_BRANCH $CIRCLE_TAG"
+                                    },
+                                    {
+                                        "title": "Commit",
+                                        "value": "$COMMIT_LINK"
+                                    },
+                                    {
+                                        "title": "Message",
+                                        "value": "$COMMIT_MSG"
+                                    },
+                                    {
+                                        "title": "Author",
+                                        "value": "<at>$COMMIT_AUTHOR_NAME</at>"
+                                    }
+                                ]
+                            }
+                        ],
+                        "bleed": true
+                    }
+                ],
+                "msteams": {
+                    "entities": [
+                        {
+                            "type": "mention",
+                            "text": "<at>$COMMIT_AUTHOR_NAME</at>",
+                            "mentioned": {
+                                "id": "$COMMIT_AUTHOR_EMAIL",
+                                "name": "$COMMIT_AUTHOR_NAME"
+                            }
+                        }
+                    ]
+                },
+                "\$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                "version": "1.5"
             }
-        },
-        {
-            "type": "Container",
-            "items": [
-                {
-                    "type": "ColumnSet",
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": "STATUS:",
-                                    "weight": "Bolder"
-                                }
-                            ],
-                            "width": "auto",
-                            "horizontalAlignment": "Left"
-                        },
-                        {
-                            "type": "Column",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": "__build_status__",
-                                    "weight": "Bolder",
-                                    "color": "__build_color__"
-                                }
-                            ],
-                            "width": "auto",
-                            "spacing": "Small"
-                        }
-                    ]
-                },
-                {
-                    "type": "TextBlock",
-                    "text": "$CIRCLE_PROJECT_REPONAME job [${CIRCLE_JOB} #${CIRCLE_BUILD_NUM}]($CIRCLE_BUILD_URL)",
-                    "weight": "Bolder"
-                },
-                {
-                    "type": "FactSet",
-                    "facts": [
-                        {
-                            "title": "Git ref",
-                            "value": "$CIRCLE_BRANCH $CIRCLE_TAG"
-                        },
-                        {
-                            "title": "Commit",
-                            "value": "$COMMIT_LINK"
-                        },
-                        {
-                            "title": "Message",
-                            "value": "$COMMIT_MSG"
-                        },
-                        {
-                            "title": "Author",
-                            "value": "<at>$COMMIT_AUTHOR_NAME</at>"
-                        }
-                    ]
-                }
-            ],
-            "bleed": true
         }
-    ],
-    "msteams": {
-        "entities": [
-            {
-                "type": "mention",
-                "text": "<at>$COMMIT_AUTHOR_NAME</at>",
-                "mentioned": {
-                  "id": "$COMMIT_AUTHOR_MAIL",
-                  "name": "$COMMIT_AUTHOR_NAME"
-                }
-              }
-        ]
-    },
-    "\$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-    "version": "1.5"
+    ]
 }
 END_HEREDOC
 )
