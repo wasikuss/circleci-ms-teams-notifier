@@ -7,11 +7,11 @@ parameters:
   show_msg:
     description: Show message?
     type: boolean
-    default: false
+    default: true
   show_author:
     description: Show author?
     type: boolean
-    default: false
+    default: true
 steps:
   - run:
       when: always
@@ -32,14 +32,16 @@ steps:
         - run:
             name: Report Build Success
             environment:
-              STATUS: "Success"
-              COLOR: "14a603"
+              STATUS: "SUCCESS"
+              COLOR: "good"
+              IMG: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M/wHwAEBgIApD5fRAAAAABJRU5ErkJggg=="
             command: <<include(scripts/report.sh)>>
             when: on_success
   - run:
       name: Report Build Failure
       environment:
-        STATUS: "Failed"
-        COLOR: "e2091d"
+        STATUS: "FAILED"
+        COLOR: "attention"
+        IMG: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg=="
       command: <<include(scripts/report.sh)>>
       when: on_fail
