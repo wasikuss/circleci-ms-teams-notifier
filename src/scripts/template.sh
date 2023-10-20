@@ -16,7 +16,7 @@ else
 fi
 
 if [[ $SHOW_AUTHOR == "1" ]]; then
-    COMMIT_AUTHOR_NAME=`git log --format="%an <%ae>" -1 $CIRCLE_SHA1`
+    COMMIT_AUTHOR_NAME=`git log --format="%an" -1 $CIRCLE_SHA1`
     COMMIT_AUTHOR_MAIL=`git log --format="%ae" -1 $CIRCLE_SHA1`
 else
     COMMIT_AUTHOR_NAME="n/a"
