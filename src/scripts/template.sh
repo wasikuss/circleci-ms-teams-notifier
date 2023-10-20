@@ -35,13 +35,6 @@ MS_TEAMS_MSG_TEMPLATE=$(cat <<END_HEREDOC
                 "body": [
                     {
                         "type": "Container",
-                        "bleed": true,
-                        "backgroundImage": {
-                            "url": "__build_img__"
-                        }
-                    },
-                    {
-                        "type": "Container",
                         "items": [
                             {
                                 "type": "ColumnSet",
