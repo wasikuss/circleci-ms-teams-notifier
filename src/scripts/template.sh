@@ -109,7 +109,7 @@ MS_TEAMS_MSG_TEMPLATE=$(cat <<END_HEREDOC
                             "type": "mention",
                             "text": "<at>$COMMIT_AUTHOR_NAME</at>",
                             "mentioned": {
-                                "id": "$COMMIT_AUTHOR_EMAIL",
+                                "id": "$COMMIT_AUTHOR_MAIL",
                                 "name": "$COMMIT_AUTHOR_NAME"
                             }
                         }
